@@ -15,3 +15,24 @@
   - date (dropdown year, week and day)
 
   - Filter for current week and current month as well as trailing 3 months
+  
+## Application Modules
+
+#### TimeLog
+- This module mantain the login and logout time of user
+- Different dropdown are dependent and shown/hidden on basis of requirement
+- Scroll based custom pagination added i-e on window scroll records are fetch.
+- Refresh button reset all the data to selected filters
+
+#### User
+- This module handles user basic details i.e basic info, team
+
+#### Team
+- This module defines different teams to which a user are associated
+ 
+### Modules Relation Description
+- A User can be part of a team
+- Time can be logged for user on same day
+- Logout time must be greater than Login time
+
+##### Happy Exploring !! :) 
