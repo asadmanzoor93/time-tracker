@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <div>
         <div class="card-header">
             Create TimeLog
@@ -16,48 +17,27 @@
                 </div>
                 <br />
             @endif
-            <form method="post" action="{{ route('saveTeam') }}">
+
+            <form method="post" action="{{ route('saveTimeLog') }}">
                 @csrf
-
-
-                <div style="position: relative">
-
-                    <strong>Timepicker:</strong>
-
-                    <input class="timepicker form-control" type="text">
-
+                <div class="form-group">
+                    <label for="name">Date:</label>
+                    <input class="date form-control" type="date" name="date" id="date">
                 </div>
 
-                <div class="container">
-                    <div class='col-md-5'>
-                        <div class="form-group">
-                            <label for="name">Login Time:</label>
-                            <div class='input-group date' id='datetimepicker6'>
-                                <input type='text' class="form-control" name="login_at" id="login_at"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class='col-md-5'>
-                        <div class="form-group">
-                            <label for="name">Logout Time:</label>
-                            <div class='input-group date' id='datetimepicker7'>
-                                <input type='text' class="form-control" name="logout_at" id="logout_at" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="name">Login Time:</label>
+                    <input class="date form-control" type="time" name="login_at" id="login_at">
                 </div>
 
+                <div class="form-group">
+                    <label for="name">Logout  Time:</label>
+                    <input class="date form-control" type="time" name="logout_at" id="logout_at">
+                </div>
 
                 <div class="form-group">
                     <label for="name">User:</label>
-                    <select class="browser-default custom-select">
+                    <select class="browser-default custom-select" name="user_id" id="user_id">
                         <option selected>Select User</option>
                         @foreach($users as $user)
                             <option value="{{$user->id}}">{{$user->name}}</option>
@@ -69,20 +49,4 @@
             </form>
         </div>
     </div>
-    @section('script')
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#datetimepicker6').datetimepicker();
-                $('#datetimepicker7').datetimepicker({
-                    useCurrent: false
-                });
-                $("#datetimepicker6").on("dp.change", function (e) {
-                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                });
-                $("#datetimepicker7").on("dp.change", function (e) {
-                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                });
-            });
-        </script>
-    @endsection
-@endsection
+   @endsection

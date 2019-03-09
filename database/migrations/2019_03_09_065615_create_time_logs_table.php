@@ -15,10 +15,10 @@ class CreateTimelogsTable extends Migration
     {
         Schema::create('time_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->date('date');
+            $table->time('login_at')->default(null)->nullable();
+            $table->time('logout_at')->default(null)->nullable();
             $table->unsignedInteger('user_id')->default(null)->nullable();
-            $table->timestamp('login_at')->default(null)->nullable();
-            $table->timestamp('logout_at')->default(null)->nullable();
             $table->timestamps();
         });
     }

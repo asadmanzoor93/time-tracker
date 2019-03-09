@@ -44,3 +44,4 @@ Route::post('/timelog/save', 'TimeLogController@store')->name('saveTimeLog');
 Route::get('/timelog/edit/{id}', 'TimeLogController@edit')->name('editTimeLog');
 Route::post('/timelog/update', 'TimeLogController@update')->name('updateTimeLog');
 Route::get('/timelog/delete/{id}', 'TimeLogController@destroy')->name('deleteTimeLog');
+Route::get('/fetch_timelogs', 'TimeLogController@fetchTimeLogsAjax')->name('fetchTimeLogsAjax');

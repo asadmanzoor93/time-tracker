@@ -6,10 +6,10 @@
                     <a class="nav-link" href="{{route('timelogsIndex')}}">TimeLogs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('teamsIndex')}}">Teams</a>
+                    <a class="nav-link" href="{{route('usersIndex')}}">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('usersIndex')}}">Users</a>
+                    <a class="nav-link" href="{{route('teamsIndex')}}">Teams</a>
                 </li>
             </ul>
 

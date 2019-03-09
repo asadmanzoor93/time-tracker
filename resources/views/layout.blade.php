@@ -3,13 +3,6 @@
 <head>
     @include('head')
     <script src="{{ asset('js/app.js') }}" type="text/js"></script>
-    <script src="{{ asset('js/jquery.min.js') }}" type="text/js"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" type="text/js"></script>
-    <script src="{{ asset('js/moment-with-locales.min.js') }}" type="text/js"></script>
-    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}" type="text/js"></script>
-
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="container">
@@ -28,6 +21,5 @@
             @include('footer')
         </footer>
     </div>
-
 </body>
 </html>

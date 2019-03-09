@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="team_id">Team:</label>
                     <select class="browser-default custom-select" id="team_id" name="team_id">
-                        <option selected>Select User</option>
+                        <option value="0" selected>Select Team</option>
                         @foreach($teams as $team)
                             <option value="{{$team->id}}">{{$team->name}}</option>
                         @endForeach

@@ -18,8 +18,12 @@ class TimeLogController extends Controller
 {
     public function index()
     {
-        $timelogs = TimeLog::all();
-        return view('timelog.index', compact('timelogs'));
+        $timelog_obj = new TimeLog();
+        $timelogs = $timelog_obj->fetchIndexTimeLogs();
+        $users = User::all();
+        $teams = Team::all();
+        $years = range(2000, strftime("%Y", time()));
+        return view('timelog.index', compact('timelogs', 'users', 'teams', 'years'));
     }
 
     public function create(){
@@ -29,26 +33,35 @@ class TimeLogController extends Controller
 
     public function store(Request $request)
     {
+        // validator extended to check login-logout time dependence
         $validatedData = $request->validate([
-            'name' => 'required'
+            'date' => 'required',
+            'user_id' => 'required',
+            'login_at' => 'required',
+            'logout_at' => 'greater_than:login_at'
         ]);
 
         TimeLog::create($validatedData);
-        return redirect('/timelog')->with('success', 'TimeLog is successfully created');
+        return redirect('/timelogs')->with('success', 'TimeLog is successfully created');
     }
 
     public function edit($id)
     {
         $timelog = TimeLog::findOrFail($id);
-        return view('timelog.edit', compact('timelog'));
+        $users = User::all();
+        return view('timelog.edit', compact('timelog', 'users'));
     }
 
     public function update(Request $request)
     {
         $id = $request->input('id');
         $validatedData = $request->validate([
-            'name' => 'required'
+            'date' => 'required',
+            'user_id' => 'required',
+            'login_at' => 'required',
+            'logout_at' => 'greater_than:login_at'
         ]);
+
         TimeLog::whereId($id)->update($validatedData);
         return redirect('/timelogs')->with('success', 'TimeLog is successfully updated');
     }
@@ -58,5 +71,16 @@ class TimeLogController extends Controller
         $timelog = TimeLog::findOrFail($id);
         $timelog->delete();
         return redirect('/timelogs')->with('success', 'TimeLog is successfully deleted');
+    }
+
+    public function fetchTimeLogsAjax(Request $request){
+        $data = $request->all();
+        $offset = $data['page'] * 5;
+
+        $timelog_obj = new TimeLog();
+        $timelogs = $timelog_obj->fetchTimeLogsAjax($data['user_filter'], $data['team_filter'], $data['search_filter'],
+                                                    $data['year'], $data['week'], $data['day'], $offset,5);
+        $innerHTML = view('timelog.partials.listing')->with('timelogs', $timelogs)->render();
+        return response()->json( array('success'=>true, 'html' => $innerHTML));
     }
 }
