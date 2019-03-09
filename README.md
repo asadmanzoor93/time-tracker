@@ -32,7 +32,7 @@
  
 ### Modules Relation Description
 - A User can be part of a team
-- Time can be logged for user on same day
-- Logout time must be greater than Login time
+- Login/Logout Time can be logged for user on any date
+- Logout time must be greater than Login time i-e this is handled by extending the validator
 
 ##### Happy Exploring !! :) 
