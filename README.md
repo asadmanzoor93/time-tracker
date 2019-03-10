@@ -16,6 +16,8 @@
 
   - Filter for current week and current month as well as trailing 3 months
   
+## Application Deployed @ http://laravel-time-tracker.herokuapp.com/
+  
 ## Application Modules
 
 #### TimeLog
