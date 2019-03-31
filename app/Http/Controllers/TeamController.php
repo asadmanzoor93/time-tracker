@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Team;
+use App\Todo;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -55,4 +56,44 @@ class TeamController extends Controller
         $team->delete();
         return redirect('/teams')->with('success', 'Team is successfully deleted');
     }
+
+    /***
+     *
+     *  Todo API Implementation
+     *
+     */
+
+    public function listTodoItems(){
+        $todoItem = Todo::all();
+        return response()->json(['status'=>true, 'todoItem'=>$todoItem]);
+    }
+
+    public function getTodoItem($id){
+        if (empty($id)){
+            return response()->json(['status'=>false, 'message'=>'Please enter todo-item id !']);
+        }
+        $todoItem = Todo::find($id);
+        return response()->json(['status'=>true, 'todoItem'=>$todoItem]);
+    }
+
+    public function todoItem(Request $request){
+        $id = $request->input('id');
+        $title = $request->input('title');
+        if (empty($title)){
+            return response()->json(['status'=>false, 'message'=>'Please enter todo-item title !']);
+        }
+        $todo = new Todo();
+        $status = $todo->todoItem($title, $id);
+        return response()->json($status);
+    }
+
+    public function deleteTodo($id){
+        $todoItem = Todo::find($id);
+        if (empty($todoItem)){
+            return response()->json(['status'=>false, 'message'=>'Please enter valid todo-item id !']);
+        }
+        $todoItem->delete();
+        return response()->json(['status'=>true, 'message'=>'Todo-item deleted successfully !']);
+    }
+
 }

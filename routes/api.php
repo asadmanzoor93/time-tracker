@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/todoItems', 'TeamController@listTodoItems')->name('listTodoItems');
+Route::get('/todoItem/{id}', 'TeamController@getTodoItem')->name('getTodoItem');
+Route::post('/todoItem', 'TeamController@todoItem')->name('todoItem');
+Route::get('/todoItem/delete/{id}', 'TeamController@deleteTodo')->name('deleteTodo');
